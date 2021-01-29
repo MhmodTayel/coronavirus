@@ -1,9 +1,11 @@
 async function getData() {
   const res = await fetch("https://corona-api.com/countries/EG");
   const output = await res.json();
+  showGraphs(output);
   showData(output);
 }
 
+setInterval(getData, 10000);
 getData();
 
 const svgConfirmed = d3
@@ -48,7 +50,7 @@ const svgNewRecovered = d3
   .attr("width", 780)
   .attr("height", 400);
 
-function showData(data) {
+function showGraphs(data) {
   const timeline = data.data.timeline;
   let timelineArr = [];
   timeline.forEach((day, idx) => {
@@ -143,45 +145,137 @@ function drawGraph(svg, dataArr, type, dataType, color) {
   yAxisGroup.selectAll("text").attr("fill", "#666666");
 }
 
-/*
-  // const domain = d3.extent(confirmed, (d) => d.totalConfirmed);
+const newDeathsEl = document.getElementById("new-deaths");
+const totalDeathsEl = document.getElementById("total-deaths");
+const totalRecoveredEl = document.getElementById("total-recovered");
+const newConfirmedEl = document.getElementById("new-confirmed");
+const totalConfiremdEl = document.getElementById("total-confiremd");
+const criticalEl = document.getElementById("critical");
+const deadRateEl = document.getElementById("dead-rate");
+const healRateEl = document.getElementById("heal-rate");
+const todayDateEl = document.getElementById("today-date");
 
-  // const yScale = d3.scaleLinear().domain(domain).range([graphHeight, 0]);
+function showData(data) {
+  const latestData = data.data.latest_data;
+  const { deaths, confirmed, recovered, critical } = latestData;
+  const { death_rate, recovery_rate } = latestData.calculated;
+  const todayDeaths = data.data.today.deaths;
+  const todayconfirmed = data.data.today.confirmed;
 
-  // const xScale = d3
-  //   .scaleBand()
-  //   .domain(confirmed.map((item) => item.date))
-  //   .range([0, 670])
-  //   .paddingInner(0);
-  // // .paddingOuter(0.2);
+  totalDeathsEl.setAttribute("data-target", deaths);
+  totalRecoveredEl.setAttribute("data-target", recovered);
+  totalConfiremdEl.setAttribute("data-target", confirmed);
+  criticalEl.setAttribute("data-target", critical);
+  deadRateEl.setAttribute("data-target", death_rate.toFixed(2));
+  healRateEl.setAttribute("data-target", recovery_rate.toFixed(2));
 
-  // const rects = graph
-  //   .selectAll("circle")
-  //   .data(confirmed)
-  //   .enter()
-  //   .append("circle")
-  //   .attr("r", 3)
-  //   .attr("fill", "#34CCFD")
-  //   .attr("cx", (d, i) => xScale(d.id))
-  //   .attr("cy", (d) => yScale(d.cases));
+  const totalRecoveredCounter = () => {
+    const target = +totalRecoveredEl.getAttribute("data-target");
+    const c = +totalRecoveredEl.innerHTML;
 
-  // const yAxis = d3.axisLeft(yScale).ticks(10, "s");
+    const increment = target / 200;
 
-  // var xAxis = d3.axisBottom(xScale).tickValues(
-  //   xScale.domain().filter(function (d, i) {
-  //     return !(i % 17);
-  //   })
-  // );
+    if (c < target) {
+      totalRecoveredEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(totalRecoveredCounter, 1);
+    } else {
+      totalRecoveredEl.innerHTML = target;
+    }
+  };
 
-  // xAxisGroup.call(xAxis);
-  // yAxisGroup.call(yAxis);
+  const totalDeathsCounter = () => {
+    const target = +totalDeathsEl.getAttribute("data-target");
+    const c = +totalDeathsEl.innerHTML;
 
-  // xAxisGroup
-  //   .selectAll("text")
-  //   .attr("transform", "rotate(-40)")
-  //   .attr("text-anchor", "end")
-  //   .attr("fill", "#666666");
+    const increment = target / 200;
 
-  // yAxisGroup.selectAll("text").attr("fill", "#666666");
+    if (c < target) {
+      totalDeathsEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(totalDeathsCounter, 1);
+    } else {
+      totalDeathsEl.innerHTML = target;
+    }
+  };
 
-  */
+  const totalConfiremdCounter = () => {
+    const target = +totalConfiremdEl.getAttribute("data-target");
+    const c = +totalConfiremdEl.innerHTML;
+
+    const increment = target / 200;
+
+    if (c < target) {
+      totalConfiremdEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(totalConfiremdCounter, 1);
+    } else {
+      totalConfiremdEl.innerHTML = target;
+    }
+  };
+
+  const criticalCounter = () => {
+    const target = +criticalEl.getAttribute("data-target");
+    const c = +criticalEl.innerHTML;
+
+    const increment = target / 200;
+
+    if (c < target) {
+      criticalEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(criticalCounter, 1);
+    } else {
+      criticalEl.innerHTML = target;
+    }
+  };
+
+  const deadRateCounter = () => {
+    const target = +deadRateEl.getAttribute("data-target");
+    const c = +deadRateEl.innerHTML;
+
+    const increment = target / 700;
+
+    if (c < target) {
+      deadRateEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(deadRateCounter, 1);
+    } else {
+      deadRateEl.innerHTML = target;
+    }
+  };
+
+  const healRateCounter = () => {
+    const target = +healRateEl.getAttribute("data-target");
+    const c = +healRateEl.innerHTML;
+
+    const increment = target / 700;
+
+    if (c < target) {
+      healRateEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(healRateCounter, 1);
+    } else {
+      healRateEl.innerHTML = target;
+    }
+  };
+  totalRecoveredCounter();
+  totalDeathsCounter();
+  totalConfiremdCounter();
+  criticalCounter();
+  deadRateCounter();
+  healRateCounter();
+
+  todayDateEl.innerText = new Date().toLocaleDateString("ar-EG-u-nu-latn", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  if (todayDeaths == "0") {
+    newDeathsEl.innerText = "---";
+    newDeathsEl.style.letterSpacing = "-4px";
+  } else {
+    newDeathsEl.innerText = todayDeaths;
+  }
+
+  if (todayconfirmed == "0") {
+    newConfirmedEl.innerText = "---";
+    newConfirmedEl.style.letterSpacing = "-4px";
+  } else {
+    newConfirmedEl.innerText = todayconfirmed;
+  }
+}

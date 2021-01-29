@@ -11,7 +11,7 @@
       <div class="right-side-info">
         <div class="header">
           <h1 dir="auto">تقرير كوفيد - 19</h1>
-          <h2 dir="auto">في مصر ليوم <span>28 يناير 2021</span></h2>
+          <h2 dir="auto">في مصر ليوم <span id="today-date">28 يناير 2021</span></h2>
         </div>
       </div>
       <div class="left-side-info">
@@ -19,27 +19,28 @@
           <div class="deaths">
             <div class="new-deaths-data">
               <h3 dir="auto">الوفيات الجديدة</h3>
-              <div class="circle" id="new-deaths">45</div>
+
+              <div class="circle" id="new-deaths"></div>
             </div>
             <div class="total-deaths-data">
               <h3 dir="auto">إجمالي عدد الوفيات</h3>
-              <div class="circle" id="total-deaths">9169</div>
+              <div class="circle" id="total-deaths"></div>
             </div>
           </div>
           <div class="recovered">
             <h3 dir="auto">
               عدد حالات الشفاء <span class="lead">(الخروج حتي الأن)</span>
             </h3>
-            <div class="circle" id="total=recovered">128440</div>
+            <div class="circle" id="total-recovered"></div>
           </div>
           <div class="confirmed">
             <div class="new-confirmed-data">
               <h3 dir="auto">الحالات الجديدة</h3>
-              <div class="circle" id="new-confiremd">521</div>
+              <div class="circle" id="new-confirmed"></div>
             </div>
             <div class="total-confirmed-data">
               <h3 dir="auto">إجمالي عدد المصابين</h3>
-              <div class="circle" id="total-confiremd">164282</div>
+              <div class="circle" id="total-confiremd"></div>
             </div>
           </div>
         </div>
@@ -47,15 +48,15 @@
           <div class="extra-data-container">
             <div class="critical-data">
               <h3 dir="auto">الحالات الحرجة</h3>
-              <div class="circle" id="total-confiremd">7840</div>
+              <div class="circle" id="critical"></div>
             </div>
             <div class="death-rate">
               <h3 dir="auto">معدل الوفيات</h3>
-              <div class="circle" id="total-confiremd">15</div>
+              <div class="circle" id="dead-rate"></div>
             </div>
             <div class="recovered-rate">
               <h3 dir="auto">معدل الشفاء</h3>
-              <div class="circle" id="total-confiremd">140</div>
+              <div class="circle" id="heal-rate"></div>
             </div>
           </div>
         </div>

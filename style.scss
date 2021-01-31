@@ -14,25 +14,35 @@ body {
 }
 
 .canvas-container {
-  margin: 50px;
+  width: 100%;
+  margin: 50 auto;
   font-family: "MyWebFont";
   .active-container {
     display: flex;
     justify-content: center;
+    margin: 50px auto;
   }
 
   .recovered-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    margin: 50px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .confirmed-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    margin: 0 100px;
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-between;
+    align-items: center;
   }
   .deaths-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    margin: 0 100px;
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -152,7 +162,7 @@ body {
     color: #fff;
     text-align: center;
     h3 {
-      margin-left: -4px;
+      margin-left: -8px;
     }
     .critical-data {
       .circle {
@@ -208,4 +218,11 @@ body {
   &-hide {
     transform: translateX(100px);
   }
+}
+
+svg {
+  // border: rgba(34, 34, 34, 0.561) solid 1px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 0 rgba($color: #000000, $alpha: 0.2);
+  // padding-left: 15px;
 }

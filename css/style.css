@@ -14,28 +14,38 @@ body {
 }
 
 .canvas-container {
-  margin: 50px;
+  width: 100%;
+  margin: 50 auto;
   font-family: "MyWebFont";
 }
 
 .canvas-container .active-container {
   display: flex;
   justify-content: center;
+  margin: 50px auto;
 }
 
 .canvas-container .recovered-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  margin: 50px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .canvas-container .confirmed-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  margin: 0 100px;
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .canvas-container .deaths-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  margin: 0 100px;
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .hero {
@@ -154,7 +164,7 @@ body {
 }
 
 .extra-data-container h3 {
-  margin-left: -4px;
+  margin-left: -8px;
 }
 
 .extra-data-container .critical-data .circle {
@@ -203,4 +213,9 @@ body {
 
 .draw-hide {
   transform: translateX(100px);
+}
+
+svg {
+  border-radius: 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }

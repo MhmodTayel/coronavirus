@@ -13,42 +13,42 @@ const svgConfirmed = d3
   .select(".canvas-confirmed")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 500);
+  .attr("height", 450);
 const svgNewConfirmed = d3
   .select(".canvas-new-confirmed")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 500);
+  .attr("height", 450);
 
 const svgActive = d3
   .select(".canvas-active")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 500);
+  .attr("height", 450);
 
 const svgDeaths = d3
   .select(".canvas-deaths")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 500);
+  .attr("height", 450);
 
 const svgNewDeaths = d3
   .select(".canvas-new-deaths")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 500);
+  .attr("height", 450);
 
 const svgRecovered = d3
   .select(".canvas-recovered")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 500);
+  .attr("height", 450);
 
 const svgNewRecovered = d3
   .select(".canvas-new-recoverd")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 500);
+  .attr("height", 450);
 
 function showGraphs(data) {
   const timeline = data.data.timeline;

@@ -113,7 +113,7 @@ body {
 }
 
 .current-data .recovered .circle {
-  color: #3ae374;
+  color: #01fa01;
 }
 
 .current-data .confirmed .circle {
@@ -161,7 +161,11 @@ body {
 }
 
 .extra-data-container .recovered-rate .circle {
-  color: #3ae374;
+  color: #01fa01;
+}
+
+.extra-data-container .new-recovered .circle {
+  color: #01fa01;
 }
 
 .extra-data .circle {

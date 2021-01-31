@@ -151,6 +151,7 @@ const totalRecoveredEl = document.getElementById("total-recovered");
 const newConfirmedEl = document.getElementById("new-confirmed");
 const totalConfiremdEl = document.getElementById("total-confiremd");
 const criticalEl = document.getElementById("critical");
+const newRecoveredEl = document.getElementById("new-recovered");
 const deadRateEl = document.getElementById("dead-rate");
 const healRateEl = document.getElementById("heal-rate");
 const todayDateEl = document.getElementById("today-date");
@@ -161,11 +162,15 @@ function showData(data) {
   const { death_rate, recovery_rate } = latestData.calculated;
   const todayDeaths = data.data.today.deaths;
   const todayconfirmed = data.data.today.confirmed;
+  const { new_confirmed, new_deaths, new_recovered } = data.data.timeline[0];
 
   totalDeathsEl.setAttribute("data-target", deaths);
   totalRecoveredEl.setAttribute("data-target", recovered);
   totalConfiremdEl.setAttribute("data-target", confirmed);
   criticalEl.setAttribute("data-target", critical);
+  newRecoveredEl.setAttribute("data-target", new_recovered);
+  newDeathsEl.setAttribute("data-target", new_deaths);
+  newConfirmedEl.setAttribute("data-target", new_confirmed);
   deadRateEl.setAttribute("data-target", death_rate.toFixed(2));
   healRateEl.setAttribute("data-target", recovery_rate.toFixed(2));
 
@@ -180,6 +185,48 @@ function showData(data) {
       setTimeout(totalRecoveredCounter, 1);
     } else {
       totalRecoveredEl.innerHTML = target;
+    }
+  };
+
+  const newRecoveredCounter = () => {
+    const target = +newRecoveredEl.getAttribute("data-target");
+    const c = +newRecoveredEl.innerHTML;
+
+    const increment = target / 200;
+
+    if (c < target) {
+      newRecoveredEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(newRecoveredCounter, 1);
+    } else {
+      newRecoveredEl.innerHTML = target;
+    }
+  };
+
+  const newConfirmedCounter = () => {
+    const target = +newConfirmedEl.getAttribute("data-target");
+    const c = +newConfirmedEl.innerHTML;
+
+    const increment = target / 200;
+
+    if (c < target) {
+      newConfirmedEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(newConfirmedCounter, 1);
+    } else {
+      newConfirmedEl.innerHTML = target;
+    }
+  };
+
+  const newDeathsCounter = () => {
+    const target = +newDeathsEl.getAttribute("data-target");
+    const c = +newDeathsEl.innerHTML;
+
+    const increment = target / 200;
+
+    if (c < target) {
+      newDeathsEl.innerHTML = `${Math.ceil(c + increment)}`;
+      setTimeout(newDeathsCounter, 1);
+    } else {
+      newDeathsEl.innerHTML = target;
     }
   };
 
@@ -258,24 +305,21 @@ function showData(data) {
   criticalCounter();
   deadRateCounter();
   healRateCounter();
+  newRecoveredCounter();
+  newConfirmedCounter();
+  newDeathsCounter();
 
-  todayDateEl.innerText = new Date().toLocaleDateString("ar-EG-u-nu-latn", {
+  var date = new Date(subDays(1)).toLocaleDateString("ar-EG-u-nu-latn", {
     weekday: "long",
     year: "numeric",
     month: "short",
     day: "numeric",
   });
-  if (todayDeaths == "0") {
-    newDeathsEl.innerText = "---";
-    newDeathsEl.style.letterSpacing = "-4px";
-  } else {
-    newDeathsEl.innerText = todayDeaths;
+  function subDays(days) {
+    var result = new Date();
+    result.setDate(result.getDate() - days);
+    return result;
   }
 
-  if (todayconfirmed == "0") {
-    newConfirmedEl.innerText = "---";
-    newConfirmedEl.style.letterSpacing = "-4px";
-  } else {
-    newConfirmedEl.innerText = todayconfirmed;
-  }
+  todayDateEl.innerText = date;
 }

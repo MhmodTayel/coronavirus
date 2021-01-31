@@ -15,6 +15,7 @@ body {
 
 .canvas-container {
   margin: 50px;
+  font-family: "MyWebFont";
 }
 
 .canvas-container .active-container {
@@ -177,4 +178,21 @@ body {
   height: 80px;
   font-size: 25px;
   line-height: 90px;
+}
+
+.toggle {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.textContainer path {
+  transition: 0.5s;
+}
+
+.clicked {
+  fill: #cccccc;
+  stroke: #cccccc;
+  color: #cccccc;
+  font-weight: 100;
+  stroke-width: 0;
 }

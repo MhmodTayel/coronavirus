@@ -1,11 +1,12 @@
+let backupData = {};
 async function getData() {
   const res = await fetch("https://corona-api.com/countries/EG");
   const output = await res.json();
   showGraphs(output);
   showData(output);
+  backupData = output;
 }
 
-setInterval(getData, 10000);
 getData();
 
 const svgConfirmed = d3
@@ -66,22 +67,70 @@ function showGraphs(data) {
   });
 
   timelineArr.reverse();
-  console.log();
+
   drawGraph(
     svgConfirmed,
     timelineArr,
     "circle",
     "totalConfirmed",
     "#34CCFD",
-    "Total Coronavirus Cases",
-    "Cases"
+    "إجمالي حالات فيروس كورونا",
+    " الحالات"
   );
-  drawGraph(svgNewConfirmed, timelineArr, "rect", "newConfirmed", "#666666");
-  drawGraph(svgActive, timelineArr, "circle", "active", "#34CCFD");
-  drawGraph(svgDeaths, timelineArr, "circle", "deaths", "#FC9928");
-  drawGraph(svgNewDeaths, timelineArr, "rect", "newDeaths", "#666666");
-  drawGraph(svgRecovered, timelineArr, "circle", "totalRecoverd", "#8ACA2B");
-  drawGraph(svgNewRecovered, timelineArr, "rect", "newRecovered", "#8ACA2B");
+  drawGraph(
+    svgNewConfirmed,
+    timelineArr,
+    "rect",
+    "newConfirmed",
+    "#666666",
+    "الحالات اليومية لفيروس كورونا المستجد",
+    "الحالات اليومية"
+  );
+  drawGraph(
+    svgActive,
+    timelineArr,
+    "circle",
+    "active",
+    "#34CCFD",
+    "مجموع مصابي فيروس كورونا الحالي",
+    "المصابين حالياّ"
+  );
+  drawGraph(
+    svgDeaths,
+    timelineArr,
+    "circle",
+    "deaths",
+    "#FC9928",
+    "إجمالي الوفيات الناجمة عن فيروس كورونا",
+    "الوفيات"
+  );
+  drawGraph(
+    svgNewDeaths,
+    timelineArr,
+    "rect",
+    "newDeaths",
+    "#666666",
+    "الوفيات اليومية بسبب فيروس كورونا المستجد",
+    "الوفيات اليومية"
+  );
+  drawGraph(
+    svgRecovered,
+    timelineArr,
+    "circle",
+    "totalRecoverd",
+    "#8ACA2B",
+    "إجمالي المتعافين ",
+    "المتعافين"
+  );
+  drawGraph(
+    svgNewRecovered,
+    timelineArr,
+    "rect",
+    "newRecovered",
+    "#8ACA2B",
+    "عدد المتعافين اليومي",
+    "المتعافين"
+  );
 }
 
 function drawGraph(svg, dataArr, type, dataType, color, yText, xText) {
@@ -103,19 +152,38 @@ function drawGraph(svg, dataArr, type, dataType, color, yText, xText) {
 
   const yScale = d3.scaleLinear().domain(domain).range([graphHeight, 0]);
 
-  graph
-    .append("text")
+  const textContainer = graph
+    .append("g")
     .attr(
       "transform",
       "translate(" +
-        graphWidth / 2 +
+        (graphWidth / 2 + 25) +
         " ," +
         (graphHeight + margin.top + 50) +
         ")"
-    )
+    );
+
+  textContainer
+    .append("path")
+    .attr("stroke", color)
+    .attr("stroke-width", 3)
+    .attr("d", "M 0 11 L 16 11")
+    .attr("transform", `translate(${xText.length > 9 ? "-70" : "-45"},-15)`);
+  textContainer
+    .append("path")
+    .attr("fill", color)
+    .attr("d", "M 8 15 A 4 4 0 1 1 8.003999999333336 14.999998000000167 Z")
+    .attr("transform", `translate(${xText.length > 9 ? "-70" : "-45"},-15)`)
+    .attr("style", "ball");
+
+  textContainer
+    .attr("class", "textContainer")
+    .append("text")
     .style("text-anchor", "middle")
     .text(xText)
-    .attr("fill", color);
+    .attr("fill", color)
+    .attr("class", "toggle");
+
   graph
     .append("text")
     .attr("transform", "rotate(-90)")
@@ -124,7 +192,9 @@ function drawGraph(svg, dataArr, type, dataType, color, yText, xText) {
     .attr("dy", "1em")
     .style("text-anchor", "middle")
     .text(yText)
-    .attr("fill", "#666666");
+    .attr("fill", "#666666")
+    .attr("font-size", "16px");
+
   const xScale = d3
     .scaleBand()
     .domain(dataArr.map((item) => item.date))
@@ -133,7 +203,8 @@ function drawGraph(svg, dataArr, type, dataType, color, yText, xText) {
   // .paddingOuter(0.2);
 
   if (type === "circle") {
-    const rects = graph
+    const rects = graph.append("g");
+    rects
       .selectAll("circle")
       .data(dataArr)
       .enter()
@@ -352,3 +423,20 @@ function showData(data) {
 
   todayDateEl.innerText = date;
 }
+
+// Hide Graph
+setTimeout(() => {
+  const toggles = document.querySelectorAll(".toggle");
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("click", (e) => {
+      Array.from(e.target.parentElement.children).forEach((child) => {
+        child.classList.toggle("clicked");
+      });
+      if (e.target.classList.contains("clicked")) {
+        e.target.parentElement.parentElement.lastChild.style.opacity = "0";
+      } else if (!e.target.classList.contains("clicked")) {
+        e.target.parentElement.parentElement.lastChild.style.opacity = "1";
+      }
+    });
+  });
+}, 1000);

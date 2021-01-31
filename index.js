@@ -12,43 +12,42 @@ const svgConfirmed = d3
   .select(".canvas-confirmed")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 400);
-
+  .attr("height", 500);
 const svgNewConfirmed = d3
   .select(".canvas-new-confirmed")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 400);
+  .attr("height", 500);
 
 const svgActive = d3
   .select(".canvas-active")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 400);
+  .attr("height", 500);
 
 const svgDeaths = d3
   .select(".canvas-deaths")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 400);
+  .attr("height", 500);
 
 const svgNewDeaths = d3
   .select(".canvas-new-deaths")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 400);
+  .attr("height", 500);
 
 const svgRecovered = d3
   .select(".canvas-recovered")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 400);
+  .attr("height", 500);
 
 const svgNewRecovered = d3
   .select(".canvas-new-recoverd")
   .append("svg")
   .attr("width", 780)
-  .attr("height", 400);
+  .attr("height", 500);
 
 function showGraphs(data) {
   const timeline = data.data.timeline;
@@ -68,7 +67,15 @@ function showGraphs(data) {
 
   timelineArr.reverse();
   console.log();
-  drawGraph(svgConfirmed, timelineArr, "circle", "totalConfirmed", "#34CCFD");
+  drawGraph(
+    svgConfirmed,
+    timelineArr,
+    "circle",
+    "totalConfirmed",
+    "#34CCFD",
+    "Total Coronavirus Cases",
+    "Cases"
+  );
   drawGraph(svgNewConfirmed, timelineArr, "rect", "newConfirmed", "#666666");
   drawGraph(svgActive, timelineArr, "circle", "active", "#34CCFD");
   drawGraph(svgDeaths, timelineArr, "circle", "deaths", "#FC9928");
@@ -77,12 +84,12 @@ function showGraphs(data) {
   drawGraph(svgNewRecovered, timelineArr, "rect", "newRecovered", "#8ACA2B");
 }
 
-function drawGraph(svg, dataArr, type, dataType, color) {
+function drawGraph(svg, dataArr, type, dataType, color, yText, xText) {
   const margin = { top: 20, right: 20, bottom: 100, left: 100 };
   const graphWidth = 680 - margin.left - margin.right;
   const graphHeight = 400 - margin.top - margin.bottom;
-
-  const graph = svg
+  svg._groups[0][0].innerHTML = "";
+  graph = svg
     .append("g")
     .attr("width", graphWidth)
     .attr("height", graphHeight)
@@ -96,6 +103,28 @@ function drawGraph(svg, dataArr, type, dataType, color) {
 
   const yScale = d3.scaleLinear().domain(domain).range([graphHeight, 0]);
 
+  graph
+    .append("text")
+    .attr(
+      "transform",
+      "translate(" +
+        graphWidth / 2 +
+        " ," +
+        (graphHeight + margin.top + 50) +
+        ")"
+    )
+    .style("text-anchor", "middle")
+    .text(xText)
+    .attr("fill", color);
+  graph
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -60)
+    .attr("x", -150)
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text(yText)
+    .attr("fill", "#666666");
   const xScale = d3
     .scaleBand()
     .domain(dataArr.map((item) => item.date))

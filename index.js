@@ -203,8 +203,8 @@ function drawGraph(svg, dataArr, type, dataType, color, yText, xText) {
   // .paddingOuter(0.2);
 
   if (type === "circle") {
-    const rects = graph.append("g");
-    rects
+    const draw = graph.append("g").attr("class", "draw");
+    draw
       .selectAll("circle")
       .data(dataArr)
       .enter()
@@ -214,7 +214,8 @@ function drawGraph(svg, dataArr, type, dataType, color, yText, xText) {
       .attr("cx", (d, i) => xScale(d.date))
       .attr("cy", (d) => yScale(d[dataType]));
   } else if (type === "rect") {
-    const rects = graph
+    const rects = graph.append("g").attr("class", "draw");
+    rects
       .selectAll("rect")
       .data(dataArr)
       .enter()
@@ -434,8 +435,14 @@ setTimeout(() => {
       });
       if (e.target.classList.contains("clicked")) {
         e.target.parentElement.parentElement.lastChild.style.opacity = "0";
+        e.target.parentElement.parentElement.lastChild.classList.add(
+          "draw-hide"
+        );
       } else if (!e.target.classList.contains("clicked")) {
         e.target.parentElement.parentElement.lastChild.style.opacity = "1";
+        e.target.parentElement.parentElement.lastChild.classList.remove(
+          "draw-hide"
+        );
       }
     });
   });

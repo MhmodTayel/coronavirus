@@ -196,3 +196,11 @@ body {
   font-weight: 100;
   stroke-width: 0;
 }
+
+.draw {
+  transition: 0.5s ease-in-out;
+}
+
+.draw-hide {
+  transform: translateX(100px);
+}

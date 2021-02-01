@@ -739,13 +739,14 @@ body.dark {
     }
 
     .left-side-info {
+      height: 100vh;
       width: 100%;
       .current-data {
         margin-top: 20px;
         width: 70vw;
-        height: 800px;
+        height: 70vh;
         display: flex;
-        justify-content: space-between;
+
         flex-direction: column;
         align-items: center;
         .circle {
@@ -756,7 +757,6 @@ body.dark {
         }
         h3 {
           font-size: 16px;
-          
         }
       }
 
@@ -790,7 +790,7 @@ body.dark {
       flex-direction: column;
 
       div {
-        transform: scale(.4);
+        transform: scale(0.4);
         margin: 20px 0;
       }
     }

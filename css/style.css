@@ -718,7 +718,7 @@ body.dark .canvas-container svg text {
   .hero .left-side-info .current-data {
     margin-top: 20px;
     width: 70vw;
-    height: 500px;
+    height: 800px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;

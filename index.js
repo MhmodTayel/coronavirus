@@ -447,3 +447,47 @@ setTimeout(() => {
     });
   });
 }, 1000);
+
+// Spicific Date
+
+const date = document.getElementById("date");
+const getDateBtn = document.getElementById("get-date");
+getDateBtn.addEventListener("click", getSpecificData);
+
+function getSpecificData(e) {
+  e.preventDefault();
+  let day;
+  backupData.data.timeline.forEach((day) => {
+    if (date.value === day.date) {
+      showSpecificData(day);
+    }
+  });
+}
+
+function showSpecificData(day) {
+  const { deaths, confirmed, recovered, active } = day;
+  const { new_confirmed, new_deaths, new_recovered } = day;
+  totalDeathsEl.innerText = deaths;
+  totalRecoveredEl.innerText = recovered;
+  totalConfiremdEl.innerText = confirmed;
+  criticalEl.innerText = active;
+  newRecoveredEl.innerText = new_recovered;
+  newDeathsEl.innerText = new_deaths;
+  newConfirmedEl.innerText = new_confirmed;
+  deadRateEl.innerText = ((deaths / confirmed) * 100).toFixed(2);
+  healRateEl.innerText = ((recovered / confirmed) * 100).toFixed(2);
+
+  var date = new Date(day.date).toLocaleDateString("ar-EG-u-nu-latn", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  function subDays(days) {
+    var result = new Date();
+    result.setDate(result.getDate() - days);
+    return result;
+  }
+
+  todayDateEl.innerText = date;
+}

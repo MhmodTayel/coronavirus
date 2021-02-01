@@ -677,7 +677,7 @@ body.dark .canvas-container svg text {
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
   .hero .right-side-info {
     height: 30vh;
   }

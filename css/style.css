@@ -679,7 +679,7 @@ body.dark .canvas-container svg text {
 
 @media (max-width: 480px) {
   .hero .right-side-info {
-    height: 30vh;
+    height: 40vh;
   }
   .hero .right-side-info .header h1,
   .hero .right-side-info .header h2 {

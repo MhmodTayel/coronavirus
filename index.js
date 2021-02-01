@@ -420,8 +420,8 @@ function showData(data) {
   todayDateEl.innerText = date;
 }
 
-function subDays(days) {
-  var result = new Date();
+function subDays(date, days) {
+  var result = new Date(date);
   result.setDate(result.getDate() - days);
   return result;
 }
@@ -453,15 +453,51 @@ setTimeout(() => {
 const date = document.getElementById("date");
 const getDateBtn = document.getElementById("get-date");
 getDateBtn.addEventListener("click", getSpecificData);
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+
+prev.addEventListener("click", prevData);
+next.addEventListener("click", nextData);
 
 function getSpecificData(e) {
   e.preventDefault();
   let data = backupData.data.timeline;
-  data.forEach((day) => {
+  data.forEach((day, idx) => {
     if (date.value === day.date) {
-      showSpecificData(day);
+      showSpecificData(data[idx - 1]);
     }
   });
+}
+
+function prevData(e) {
+  next.disabled = false;
+
+  e.preventDefault();
+  let currentDate = date.value;
+  let timeline = backupData.data.timeline;
+  let result = timeline.filter((day) => day.date === currentDate)[0];
+  if (new Date(date.value) === new Date(date.min)) {
+    prev.disabled = true;
+  } else {
+    prev.disabled = false;
+    showSpecificData(result);
+  }
+
+  date.value = formatDate(subDays(currentDate, 1));
+}
+
+function nextData(e) {
+  e.preventDefault();
+  let currentDate = date.value;
+  let timeline = backupData.data.timeline;
+  let result = timeline.filter((day) => day.date === currentDate)[0];
+  if (new Date(currentDate) < new Date(subDays(date.max, 1))) {
+    showSpecificData(result);
+    next.disabled = false;
+  } else {
+    next.disabled = true;
+  }
+  date.value = formatDate(subDays(currentDate, -1));
 }
 
 function showSpecificData(day) {
@@ -489,11 +525,11 @@ function showSpecificData(day) {
       month: "short",
       day: "numeric",
     });
-    function subDays(days) {
-      var result = new Date();
-      result.setDate(result.getDate() - days);
-      return result;
-    }
+    // function subDays(date, days) {
+    //   var result = new Date(dat);
+    //   result.setDate(result.getDate() - days);
+    //   return result;
+    // }
     todayDateEl.innerText = date;
     circles.forEach((circle) => {
       circle.classList.remove("fadeIn");
@@ -504,14 +540,25 @@ function showSpecificData(day) {
 
 setTimeout(() => {
   date.min = backupData.data.timeline[backupData.data.timeline.length - 1].date;
-  let today = subDays(1);
-  let todayDate =
-    today.getFullYear() +
-    "-" +
-    `${today.getMonth() + 1}`.padStart(2, "0") +
-    "-" +
-    today.getDate();
 
-  date.max = todayDate;
-  console.log(date.min, date.max);
-}, 1000);
+  date.max = formatDate(subDays(new Date(), 1));
+}, 200);
+
+date.value = formatDate(subDays(new Date(), 1));
+
+function formatDate(date) {
+  return (
+    date.getFullYear() +
+    "-" +
+    `${date.getMonth() + 1}`.padStart(2, "0") +
+    "-" +
+    `${date.getDate()}`.padStart(2, "0")
+  );
+}
+
+if (
+  formatDate(new Date(date.value)) ===
+  formatDate(new Date(subDays(new Date(), 1)))
+) {
+  next.disabled = true;
+}

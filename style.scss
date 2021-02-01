@@ -244,9 +244,8 @@ svg {
     box-shadow: 0 0 10px 0 rgba($color: #000000, $alpha: 0.2);
     padding-left: 10px;
     text-align: center;
-    &::webkit-date
   }
-  button {
+  .btn {
     display: block;
     text-align: center;
     margin: 0 auto;
@@ -299,6 +298,30 @@ body .left-side-info .extra-data {
       &::after {
         opacity: 0;
       }
+    }
+  }
+}
+
+.next-prev {
+  display: flex;
+  margin-top: 30px;
+  .btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .fa-chevron-left {
+      margin-right: 8px;
+    }
+
+    & .fa-chevron-right {
+      margin-left: 8px;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      transform: translate(0, 0);
+      box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
     }
   }
 }

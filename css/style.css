@@ -242,7 +242,7 @@ svg {
   text-align: center;
 }
 
-.specific-date button {
+.specific-date .btn {
   display: block;
   text-align: center;
   margin: 0 auto;
@@ -260,12 +260,12 @@ svg {
   outline: none;
 }
 
-.specific-date button:hover {
+.specific-date .btn:hover {
   transform: translateY(-2px);
   box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
-.specific-date button:active {
+.specific-date .btn:active {
   transform: translateY(0px);
 }
 
@@ -296,4 +296,29 @@ body .left-side-info .extra-data .circle.fadeIn::after {
 body .left-side-info .current-data .circle.fadeOut::after,
 body .left-side-info .extra-data .circle.fadeOut::after {
   opacity: 0;
+}
+
+.next-prev {
+  display: flex;
+  margin-top: 30px;
+}
+
+.next-prev .btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.next-prev .btn .fa-chevron-left {
+  margin-right: 8px;
+}
+
+.next-prev .btn .fa-chevron-right {
+  margin-left: 8px;
+}
+
+.next-prev .btn:disabled {
+  cursor: not-allowed;
+  transform: translate(0, 0);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

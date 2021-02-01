@@ -718,6 +718,13 @@ body.dark .canvas-container svg text {
   .hero .left-side-info .current-data {
     margin-top: 20px;
     width: 70vw;
+    display: flex;
+    height: 60vh;
+  }
+  .hero .left-side-info .current-data div {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
   }
   .hero .left-side-info .current-data .circle {
     width: 60px;
@@ -729,7 +736,7 @@ body.dark .canvas-container svg text {
     font-size: 16px;
   }
   .hero .left-side-info .extra-data {
-    margin-top: 20px;
+    margin-top: -120px;
     width: 70vw;
   }
   .hero .left-side-info .extra-data h3 {

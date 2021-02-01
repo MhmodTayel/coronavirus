@@ -12,6 +12,7 @@
 body {
   font-family: "MyWebFont";
   font-size: 16px;
+  transition: 0.2s;
 }
 
 .canvas-container {
@@ -65,6 +66,7 @@ body {
     clip-path: polygon(0 0, 78% 0, 67% 100%, 0% 100%);
   }
   .right-side-info {
+    transition: 0.1s;
     position: absolute;
     z-index: 10;
     background-color: #d4eeef;
@@ -119,6 +121,7 @@ body {
 
   .deaths {
     .circle {
+      transition: 0.1s;
       color: #222;
     }
   }
@@ -138,6 +141,7 @@ body {
 }
 
 .circle {
+  transition: 0.1s;
   background-color: #fff;
   width: 200px;
   height: 200px;
@@ -172,6 +176,7 @@ body {
     }
     .death-rate {
       .circle {
+        transition: 0.1s;
         color: #222;
       }
     }
@@ -322,6 +327,139 @@ body .left-side-info .extra-data {
       cursor: not-allowed;
       transform: translate(0, 0);
       box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
+    }
+  }
+}
+
+.toggle-container {
+  position: absolute;
+  right: -50px;
+  top: 50px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  // width: 100px;
+  // height: 80px;
+}
+
+.toggle-container .dark-toggle {
+  visibility: hidden;
+}
+
+.toggle-container .label {
+  width: 60px;
+  height: 30px;
+  background-color: #eee;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 15px 0;
+  margin-right: 150px;
+  margin-top: -30px;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+  &::before {
+    position: absolute;
+    transform: translate(-40px, 3px);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f185";
+    color: #ffb300;
+    font-size: 25px;
+    opacity: 1;
+  }
+  &::after {
+    position: absolute;
+    transform: translate(76px, 3px);
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f186";
+    color: #222;
+    font-size: 23px;
+    opacity: 0.3;
+  }
+}
+
+.toggle-container .label .ball {
+  background-color: #044d91;
+  height: 27px;
+  width: 27px;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  animation: slideOff 0.2s linear forwards;
+}
+
+.dark-toggle:checked + .label {
+  background-color: #eee;
+  &::after {
+    opacity: 1;
+    color: #eee;
+  }
+  &::before {
+    opacity: 0.5;
+  }
+}
+
+.dark-toggle:checked + .label .ball {
+  animation: slideOn 0.2s linear forwards;
+}
+
+@keyframes slideOn {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+
+  100% {
+    transform: translateX(28px) scale(1);
+  }
+}
+
+@keyframes slideOff {
+  0% {
+    transform: translateX(28px) scale(1);
+  }
+  50% {
+  }
+  100% {
+    transform: translateX(0px) scale(1);
+  }
+}
+
+body.dark {
+  background: #121212;
+  .circle {
+    background-color: #222;
+  }
+  .deaths {
+    .circle {
+      color: #fff;
+    }
+  }
+  .death-rate {
+    .circle {
+      color: #fff;
+    }
+  }
+  .right-side-info {
+    background-color: #121212;
+  }
+
+  .canvas-container {
+    background-color: #121212;
+    svg {
+      background-color: #1f1f1f;
+      rect {
+        fill: #eee;
+      }
+      text {
+        fill: #eee;
+      }
     }
   }
 }

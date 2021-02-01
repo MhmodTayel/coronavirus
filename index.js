@@ -410,12 +410,15 @@ function showData(data) {
   newConfirmedCounter();
   newDeathsCounter();
 
-  var date = new Date(subDays(1)).toLocaleDateString("ar-EG-u-nu-latn", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  var date = new Date(subDays(new Date(), 1)).toLocaleDateString(
+    "ar-EG-u-nu-latn",
+    {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }
+  );
 
   todayDateEl.innerText = date;
 }
@@ -525,11 +528,11 @@ function showSpecificData(day) {
       month: "short",
       day: "numeric",
     });
-    // function subDays(date, days) {
-    //   var result = new Date(dat);
-    //   result.setDate(result.getDate() - days);
-    //   return result;
-    // }
+    function subDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() - days);
+      return result;
+    }
     todayDateEl.innerText = date;
     circles.forEach((circle) => {
       circle.classList.remove("fadeIn");
@@ -562,3 +565,8 @@ if (
 ) {
   next.disabled = true;
 }
+
+DarkToggle = document.getElementById("dark-toggle");
+DarkToggle.addEventListener("click", () => {
+  document.querySelector("body").classList.toggle("dark");
+});

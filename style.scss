@@ -739,16 +739,11 @@ body.dark {
     }
 
     .left-side-info {
-      height: 100vh;
       width: 100%;
       .current-data {
         margin-top: 20px;
         width: 70vw;
-        height: 70vh;
-        display: flex;
 
-        flex-direction: column;
-        align-items: center;
         .circle {
           width: 60px;
           height: 60px;

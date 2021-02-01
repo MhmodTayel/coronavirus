@@ -182,7 +182,8 @@ body {
     }
     .new-recovered {
       .circle {
-        color: rgb(1, 250, 1);
+        color: rgba(1, 250, 1, 1);
+        animation: fade 2s infinite;
       }
     }
   }
@@ -232,4 +233,34 @@ svg {
   position: absolute;
   top: 50%;
   right: 100px;
+}
+
+body .left-side-info .current-data,
+body .left-side-info .extra-data {
+  .circle {
+    position: relative;
+
+    &::after {
+      transition: opacity 0.5s;
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    &.fadeIn {
+      &::after {
+        opacity: 1;
+      }
+    }
+    &.fadeOut {
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
 }

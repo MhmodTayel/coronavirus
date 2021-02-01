@@ -182,6 +182,7 @@ body {
 
 .extra-data-container .new-recovered .circle {
   color: #01fa01;
+  animation: fade 2s infinite;
 }
 
 .extra-data .circle {
@@ -226,4 +227,33 @@ svg {
   position: absolute;
   top: 50%;
   right: 100px;
+}
+
+body .left-side-info .current-data .circle,
+body .left-side-info .extra-data .circle {
+  position: relative;
+}
+
+body .left-side-info .current-data .circle::after,
+body .left-side-info .extra-data .circle::after {
+  transition: opacity 0.5s;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+body .left-side-info .current-data .circle.fadeIn::after,
+body .left-side-info .extra-data .circle.fadeIn::after {
+  opacity: 1;
+}
+
+body .left-side-info .current-data .circle.fadeOut::after,
+body .left-side-info .extra-data .circle.fadeOut::after {
+  opacity: 0;
 }

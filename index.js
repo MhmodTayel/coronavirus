@@ -465,29 +465,39 @@ function getSpecificData(e) {
 }
 
 function showSpecificData(day) {
-  const { deaths, confirmed, recovered, active } = day;
-  const { new_confirmed, new_deaths, new_recovered } = day;
-  totalDeathsEl.innerText = deaths;
-  totalRecoveredEl.innerText = recovered;
-  totalConfiremdEl.innerText = confirmed;
-  criticalEl.innerText = active;
-  newRecoveredEl.innerText = new_recovered;
-  newDeathsEl.innerText = new_deaths;
-  newConfirmedEl.innerText = new_confirmed;
-  deadRateEl.innerText = ((deaths / confirmed) * 100).toFixed(2);
-  healRateEl.innerText = ((recovered / confirmed) * 100).toFixed(2);
-
-  var date = new Date(day.date).toLocaleDateString("ar-EG-u-nu-latn", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+  const circles = document.querySelectorAll(".circle");
+  circles.forEach((circle) => {
+    circle.classList.add("fadeIn");
+    circle.classList.remove("fadeOut");
   });
-  function subDays(days) {
-    var result = new Date();
-    result.setDate(result.getDate() - days);
-    return result;
-  }
 
-  todayDateEl.innerText = date;
+  setTimeout(() => {
+    const { deaths, confirmed, recovered, active } = day;
+    const { new_confirmed, new_deaths, new_recovered } = day;
+    totalDeathsEl.innerHTML = deaths;
+    totalRecoveredEl.innerHTML = recovered;
+    totalConfiremdEl.innerHTML = confirmed;
+    criticalEl.innerHTML = active;
+    newRecoveredEl.innerHTML = new_recovered;
+    newDeathsEl.innerHTML = new_deaths;
+    newConfirmedEl.innerHTML = new_confirmed;
+    deadRateEl.innerHTML = ((deaths / confirmed) * 100).toFixed(2);
+    healRateEl.innerHTML = ((recovered / confirmed) * 100).toFixed(2);
+    var date = new Date(day.date).toLocaleDateString("ar-EG-u-nu-latn", {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+    function subDays(days) {
+      var result = new Date();
+      result.setDate(result.getDate() - days);
+      return result;
+    }
+    todayDateEl.innerText = date;
+    circles.forEach((circle) => {
+      circle.classList.remove("fadeIn");
+      circle.classList.add("fadeOut");
+    });
+  }, 600);
 }

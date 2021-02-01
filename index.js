@@ -416,15 +416,15 @@ function showData(data) {
     month: "short",
     day: "numeric",
   });
-  function subDays(days) {
-    var result = new Date();
-    result.setDate(result.getDate() - days);
-    return result;
-  }
 
   todayDateEl.innerText = date;
 }
 
+function subDays(days) {
+  var result = new Date();
+  result.setDate(result.getDate() - days);
+  return result;
+}
 // Hide Graph
 setTimeout(() => {
   const toggles = document.querySelectorAll(".toggle");
@@ -456,8 +456,8 @@ getDateBtn.addEventListener("click", getSpecificData);
 
 function getSpecificData(e) {
   e.preventDefault();
-  let day;
-  backupData.data.timeline.forEach((day) => {
+  let data = backupData.data.timeline;
+  data.forEach((day) => {
     if (date.value === day.date) {
       showSpecificData(day);
     }
@@ -501,3 +501,17 @@ function showSpecificData(day) {
     });
   }, 600);
 }
+
+setTimeout(() => {
+  date.min = backupData.data.timeline[backupData.data.timeline.length - 1].date;
+  let today = subDays(1);
+  let todayDate =
+    today.getFullYear() +
+    "-" +
+    `${today.getMonth() + 1}`.padStart(2, "0") +
+    "-" +
+    today.getDate();
+
+  date.max = todayDate;
+  console.log(date.min, date.max);
+}, 1000);

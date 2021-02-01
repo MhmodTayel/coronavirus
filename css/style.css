@@ -464,3 +464,305 @@ body.dark .canvas-container svg rect {
 body.dark .canvas-container svg text {
   fill: #eee;
 }
+
+@media (max-width: 1530px) {
+  .canvas-container {
+    margin: 0;
+  }
+  .canvas-container .active-container,
+  .canvas-container .recovered-container,
+  .canvas-container .confirmed-container,
+  .canvas-container .deaths-container {
+    justify-content: space-around;
+  }
+  .canvas-container .active-container div,
+  .canvas-container .recovered-container div,
+  .canvas-container .confirmed-container div,
+  .canvas-container .deaths-container div {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 1250px) {
+  .canvas-container {
+    margin-top: 50px;
+  }
+  .canvas-container .active-container,
+  .canvas-container .recovered-container,
+  .canvas-container .confirmed-container,
+  .canvas-container .deaths-container {
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0px;
+    flex-direction: column;
+  }
+  .canvas-container .active-container div,
+  .canvas-container .recovered-container div,
+  .canvas-container .confirmed-container div,
+  .canvas-container .deaths-container div {
+    transform: scale(1);
+    margin: 20px 0;
+  }
+  .hero .right-side-info .header h1 {
+    font-size: 38px;
+  }
+  .hero .right-side-info .header h2 {
+    font-size: 20px;
+  }
+  .hero .right-side-info .specific-date {
+    right: 50px;
+  }
+  .hero .left-side-info .circle {
+    width: 150px;
+    height: 150px;
+    font-size: 40px;
+    line-height: 170px;
+  }
+  .hero .left-side-info h3 {
+    font-size: 20px;
+  }
+  .hero .left-side-info .extra-data .circle {
+    width: 80px;
+    height: 80px;
+    font-size: 20px;
+    line-height: 90px;
+  }
+  .hero .left-side-info .extra-data h3 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 950px) {
+  .hero .left-side-info {
+    clip-path: polygon(0 0, 68% 0, 58% 100%, 0% 100%);
+  }
+  .hero .left-side-info .current-data {
+    width: 50vw;
+    height: 60vh;
+  }
+  .hero .left-side-info .circle {
+    width: 100px;
+    height: 100px;
+    font-size: 28px;
+    line-height: 115px;
+  }
+  .hero .left-side-info h3 {
+    font-size: 18px;
+  }
+  .hero .left-side-info .extra-data {
+    width: 50vw;
+    margin-top: 100px;
+    grid-template-columns: 1fr 10fr 1fr;
+  }
+  .hero .left-side-info .extra-data-container {
+    justify-content: space-between;
+  }
+  .hero .left-side-info .extra-data .circle {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 70px;
+  }
+  .hero .left-side-info .extra-data h3 {
+    font-size: 12px;
+  }
+  .hero .right-side-info {
+    clip-path: polygon(100% 0, 68% 0, 58% 100%, 100% 100%);
+  }
+  .hero .right-side-info .header h1 {
+    font-size: 28px;
+  }
+  .hero .right-side-info .header h2 {
+    font-size: 22px;
+  }
+  .hero .right-side-info .specific-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    right: 10px;
+  }
+  .hero .right-side-info .specific-date #date {
+    font-size: 16px;
+    width: 180px;
+    padding: 5px;
+  }
+  .hero .right-side-info .specific-date .btn {
+    font-size: 16px;
+    padding: 5 15px;
+  }
+  .hero .right-side-info .specific-date .next-prev {
+    width: 220px;
+  }
+  .toggle-container {
+    transform: scale(0.7);
+  }
+}
+
+@media (max-width: 700px) {
+  .canvas-container {
+    margin-top: 50px;
+  }
+  .canvas-container .active-container,
+  .canvas-container .recovered-container,
+  .canvas-container .confirmed-container,
+  .canvas-container .deaths-container {
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0px;
+    flex-direction: column;
+  }
+  .canvas-container .active-container div,
+  .canvas-container .recovered-container div,
+  .canvas-container .confirmed-container div,
+  .canvas-container .deaths-container div {
+    transform: scale(0.7);
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .canvas-container {
+    margin-top: 50px;
+  }
+  .canvas-container .active-container,
+  .canvas-container .recovered-container,
+  .canvas-container .confirmed-container,
+  .canvas-container .deaths-container {
+    height: auto;
+  }
+  .canvas-container .active-container div,
+  .canvas-container .recovered-container div,
+  .canvas-container .confirmed-container div,
+  .canvas-container .deaths-container div {
+    transform: scale(0.5);
+    margin: 20px 0;
+  }
+  .hero .left-side-info {
+    position: static;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .hero .right-side-info {
+    position: static;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .hero .right-side-info .header {
+    margin-top: 0;
+  }
+  .hero .right-side-info .toggle-container {
+    left: -60px;
+    top: 30px;
+  }
+  .hero .right-side-info .specific-date {
+    position: static;
+    margin-top: 20px;
+    display: block;
+  }
+  .hero .right-side-info .specific-date #date {
+    width: 250px;
+    transform: translateX(-50px);
+    float: right;
+  }
+  .hero .right-side-info .specific-date .btn {
+    display: inline;
+    margin: 0;
+    float: right;
+    transform: translateX(-50px);
+    margin-right: 70px;
+  }
+  .hero .right-side-info .specific-date .next-prev .btn {
+    display: inline;
+    margin: 0;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero .right-side-info {
+    height: 30vh;
+  }
+  .hero .right-side-info .header h1,
+  .hero .right-side-info .header h2 {
+    margin-right: 20px;
+  }
+  .hero .right-side-info .toggle-container {
+    margin-left: 10px;
+  }
+  .hero .right-side-info .specific-date #date {
+    width: 150px;
+  }
+  .hero .right-side-info .specific-date .btn {
+    margin-right: 20px;
+  }
+  .hero .right-side-info .next-prev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+  .hero .right-side-info .next-prev .btn {
+    position: absolute;
+  }
+  .hero .right-side-info .next-prev .btn#next {
+    top: 15px;
+    left: 250px;
+  }
+  .hero .right-side-info .next-prev .btn#prev {
+    top: 15px;
+    left: 120px;
+  }
+  .hero .left-side-info {
+    width: 100%;
+  }
+  .hero .left-side-info .current-data {
+    margin-top: 20px;
+    width: 70vw;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero .left-side-info .current-data .circle {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 70px;
+  }
+  .hero .left-side-info .current-data h3 {
+    font-size: 16px;
+  }
+  .hero .left-side-info .extra-data {
+    margin-top: 20px;
+    width: 70vw;
+  }
+  .hero .left-side-info .extra-data h3 {
+    font-size: 10px;
+  }
+  .hero .left-side-info .extra-data .circle {
+    width: 50px;
+    height: 50px;
+    line-height: 58px;
+    font-size: 14px;
+  }
+  .canvas-container {
+    margin-top: 50px;
+  }
+  .canvas-container .active-container,
+  .canvas-container .recovered-container,
+  .canvas-container .confirmed-container,
+  .canvas-container .deaths-container {
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0px;
+    flex-direction: column;
+  }
+  .canvas-container .active-container div,
+  .canvas-container .recovered-container div,
+  .canvas-container .confirmed-container div,
+  .canvas-container .deaths-container div {
+    transform: scale(0.4);
+    margin: 20px 0;
+  }
+}

@@ -570,3 +570,15 @@ DarkToggle = document.getElementById("dark-toggle");
 DarkToggle.addEventListener("click", () => {
   document.querySelector("body").classList.toggle("dark");
 });
+
+const screenShot = document.getElementById("screenshot");
+const screenData = document.getElementById("screen-data");
+const screenContainer = document.getElementById("srceenshot-canvas");
+
+screenShot.addEventListener("click", takeScreenShot);
+
+function takeScreenShot(e) {
+  html2canvas(screenData).then((canvas) => {
+    document.body.appendChild(canvas);
+  });
+}
